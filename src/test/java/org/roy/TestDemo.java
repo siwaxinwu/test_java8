@@ -8,6 +8,7 @@ import org.roy.inter.MyFunction;
 
 import javax.management.remote.rmi._RMIConnection_Stub;
 import javax.sound.midi.Soundbank;
+import java.security.Key;
 import java.security.PublicKey;
 import java.util.*;
 import java.util.function.*;
@@ -169,7 +170,6 @@ public class TestDemo {
             return Status.WORKING.equals(ele.getStatus());
         });
         System.out.println(d);
-
     }
 
     @Test
@@ -190,8 +190,6 @@ public class TestDemo {
         Double aDouble = TestDemo.createEnumData().stream().map(Employee::getSalary).reduce(Double::sum).get();
         System.out.println(aDouble);
         System.out.println("-------------------------------------------------");
-
-
     }
 
     @Test
@@ -202,20 +200,28 @@ public class TestDemo {
         System.out.println("max----" + result1.getMax() + "---min---" + result1.getMin() + "---avg---" + result1.getAverage());
         System.out.println("---------------------------------------------------------------------------------");
         System.out.println(result1.getCount() + result1.getSum());
+    }
+
+    //测试分组
+    @Test
+    public void test14(){
+        Map<Integer, List<Employee>> map = TestDemo.createEnumData().stream().collect(Collectors.groupingBy((ele) -> {
+            return ele.getAge();
+        }));
+        map.forEach((key, value) -> {
+            System.out.println("----------------");
+            System.out.println(key);
+            System.out.println(value);
+        });
 
     }
 
 
+    @Test
+    public void test15(){
+        System.out.println(Integer.parseInt("01"));
 
-
-
-
-
-
-
-
-
-
+    }
 
     public static List<Employee> createData() {
         List<Employee> employees = Arrays.asList(
