@@ -1,3 +1,5 @@
 target/classes/org/roy/Student.class
 target/classes/org/roy/serializableDemo/SerializableTest$1.class
 target/classes/org/roy/serializableDemo/SerializableTest.class
+.idea/
+target/

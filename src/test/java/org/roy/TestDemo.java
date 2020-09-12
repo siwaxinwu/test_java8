@@ -8,6 +8,8 @@ import org.roy.inter.MyFunction;
 
 import javax.management.remote.rmi._RMIConnection_Stub;
 import javax.sound.midi.Soundbank;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.security.Key;
 import java.security.PublicKey;
 import java.util.*;
@@ -218,8 +220,37 @@ public class TestDemo {
 
 
     @Test
+    //演示自动拆箱发生空指针,三目表达式中表达式1和表达式2的类型不一致，会强制拆箱升级为表示范围更大的那个类型，
+    // 自动装箱都是通过包装类的valueOf() 方法来实现的. 自动拆箱都是通过包装
+    //类对象的xxxValue() 来实现的（如booleanValue()、longValue() 等）。
+
     public void test15(){
-        System.out.println(Integer.parseInt("01"));
+        Integer a = 1;
+        Integer b = 2;
+        Integer c = null;
+        Boolean flag = true;
+        Integer result  = flag ? a*b : c;
+        System.out.println(result);
+        //获取变量的类型
+        int i = a * b;
+    }
+
+    @Test
+    public void test111() throws Exception {
+        //在初始化HashMap 的时候，应该尽量指定其大小。尤其
+        //是当你已知map 中存放的元素个数时。（《阿里巴巴Java 开发规约》）
+        HashMap<String, String> map = new HashMap<>(8);
+        Class<? extends Map> clazz = map.getClass();
+        Method capacity = clazz.getDeclaredMethod("capacity");
+        capacity.setAccessible(true);
+        System.out.println(capacity.invoke(map));
+
+        Field size = clazz.getDeclaredField("size");
+        size.setAccessible(true);
+        System.out.println(size.get(map));
+
+
+
 
     }
 
