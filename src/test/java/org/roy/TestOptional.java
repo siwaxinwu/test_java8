@@ -1,12 +1,16 @@
 package org.roy;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Rule;
 import org.junit.Test;
 import org.roy.entity.Employee;
 
 import javax.swing.text.html.Option;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -69,6 +73,59 @@ public class TestOptional {
         System.out.println(present);
 
     }
+
+	@Test
+	public void  test4(){
+		ArrayList<Long> longs = new ArrayList<>();
+		longs.add(1L);
+		longs.add(12L);
+		longs.add(13L);
+		ArrayList<Integer> integers = new ArrayList<>();
+		integers.add(1);
+		integers.add(12);
+		integers.add(13);
+		boolean b = integers.containsAll(longs);
+		System.out.println(b);
+
+
+	}
+
+
+	@Test
+	public void  test422(){
+		BigDecimal d = new BigDecimal("2.225").setScale(2, BigDecimal.ROUND_HALF_UP);
+
+		System.out.println(d);
+
+
+	}
+
+	@Test
+	public void  test4221(){
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+
+		ArrayList<Integer> list1 = new ArrayList<>();
+		list1.add(1);
+		list1.add(2);
+		list1.add(3);
+		list1.add(4);
+		boolean b = list.containsAll(list1);
+		System.out.println(b);
+
+
+	}
+
+	@Test
+	public void  test42211(){
+		Long aLong = Long.valueOf("3");
+		Long aLong1 = Long.valueOf(3);
+		System.out.println(aLong + "   " + aLong1);
+		System.out.println(aLong1.compareTo(1L) );
+	}
 
 
 

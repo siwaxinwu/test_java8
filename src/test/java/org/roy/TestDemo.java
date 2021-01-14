@@ -1,6 +1,7 @@
 package org.roy;
 
 
+import com.sun.xml.internal.messaging.saaj.soap.ver1_1.BodyElement1_1Impl;
 import org.junit.Test;
 import org.roy.entity.Employee;
 import org.roy.entity.Status;
@@ -10,11 +11,15 @@ import javax.management.remote.rmi._RMIConnection_Stub;
 import javax.sound.midi.Soundbank;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.security.Key;
 import java.security.PublicKey;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.*;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -24,6 +29,115 @@ import java.util.stream.Stream;
  * history:
  */
 public class TestDemo {
+
+    @Test
+    //将一条员工记录转化为map（string：name,value: employee记录）
+    //Function.identity()返回一个输出跟输入一样的Lambda表达式对象，等价于形如t -> t形式的Lambda表达式
+    public void testToMap(){
+        List<Employee> data = TestDemo.createData();
+        Map<Integer, Employee> result = data.stream().collect(Collectors.toMap(Employee::getAge, Function.identity(), (ele1, ele2) -> ele2));
+        System.out.println(result);
+    }
+
+    @Test
+    public void testToMap1(){
+        int i = ThreadLocalRandom.current().nextInt(2);
+        System.out.println(i);
+    }
+
+    @Test
+    public void testLong(){
+        Stream<Long> boxed = LongStream.rangeClosed(1, 10).boxed();
+        ConcurrentHashMap<String, Long> collect =
+                boxed.collect(Collectors.toConcurrentMap(ele -> UUID.randomUUID().toString(), Function.identity(),
+                        (ele1, ele2) -> ele1, ConcurrentHashMap::new));
+    }
+
+    /**
+     * 这个方法有两个参数，Key 和一个根据 Key 来产生 Value 的 Function；然后返回一个 Value。
+     * 这个方法会检查 Map 中的 Key，如果发现 Key 不存在或者对应的值是 null，则调用 Function 来产生一个值，然后将其放入 Map，
+     * 最后返回这个值；否则的话返回 Map 已经存在的值。
+     *
+     *
+     * V getOrDefault(Object, V)
+     * 这个方法同样检查 Map 中的 Key，如果发现 Key 不存在或者对应的 value 值是 null，则返回第二个参数即默认值。要注意，这个默认值不会放入 Map
+     *
+     * V putIfAbsent(K, V)
+     * 这个方法的逻辑完全不同，注意它不是一个 get() 方法，而是 put() 方法的变种！这个方法的逻辑是，如果 Key 不存在或者对应的值是 null，
+     * 则将 Value 设置进去，
+     */
+    @Test
+    public void testComputeIfAbsent(){
+        Map<String, List<String>> map = new HashMap<>();
+        /*List<String> list = map.get("list1");
+        if (list == null) {
+            list = new ArrayList<>();
+            map.put("list1", list);
+        }
+        list.add("A");
+        map.entrySet().stream().forEach(System.out::println);*/
+
+        map.computeIfAbsent("list1", k -> new ArrayList<>()).add("A");
+        map.entrySet().stream().forEach(System.out::println);
+
+        Map<String, List<String>> map1 = new HashMap<>();
+        map1.getOrDefault("list1", new ArrayList<>()).add("A");
+    }
+
+
+    @Test
+    public void testPutIfAbsent(){
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "ok");
+        for (int i = 0; i < 10; i++) {
+            map.putIfAbsent(i, "val" + i);
+        }
+
+        map.entrySet().stream().forEach(System.out:: println);
+        System.out.println("-------------------------------------");
+        //计算进行覆盖
+        System.out.println("map.get(3)" + map.get(3));  //val13
+        String s = map.computeIfPresent(3, (num, val) -> val + num);
+        System.out.println(s);  //val133
+        System.out.println("map.get(3)" + map.get(3));   //val133
+        System.out.println("-------------------------------------");
+
+        System.out.println(map.get(23));  //null
+        String s1 = map.computeIfAbsent(23, num -> "val" + num);
+        System.out.println(s1); // val23
+        System.out.println(map.containsKey(23)); //true
+        System.out.println(map.get(23)); // val23
+        System.out.println("-------------------------------------");
+
+        //注意区分absent和present
+        System.out.println("map.get(3)" + map.get(3));  //val33
+        map.computeIfAbsent(3, num -> "bam" + num);
+        System.out.println("map.get(3)" + map.get(3));//val33
+        System.out.println("-------------------------------------");
+
+
+
+        //不能存null，
+        /*map.computeIfPresent(9, (num, val) -> null);
+        System.out.println(map.containsKey(9));*/
+        System.out.println("-------------------------------------");
+
+        System.out.println("map.get(42)" + map.get(42));
+        String not_found = map.getOrDefault(42, "not found");// not found
+        System.out.println( not_found);
+        System.out.println("map.get(42)" + map.get(42));
+        System.out.println("-------------------------------------");
+        //Merge 做的事情是如果键名不存在则插入，否则则对原键对应的值做合并操作并重新插入到 map 中。
+        System.out.println(map.get(9));
+        map.merge(9, "val9", (value, newValue) -> value.concat(newValue));
+        System.out.println(map.get(9));
+        map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
+        System.out.println(map.get(9));             // val9concat
+
+    }
+
+
+
     @Test
     //注意比较匿名表达式带大括号的时候的写法，获取年纪大于30，35的员工记录
     public void test1(){
@@ -254,9 +368,40 @@ public class TestDemo {
 
     }
 
+
+    @Test
+    public void test1112() throws Exception {
+        List<String> strings = new ArrayList<String>();
+        strings.add("11");
+        strings.add("22");
+        strings.add("22");
+
+        //mobileNos去重
+        strings= strings.stream().distinct().collect(Collectors.toList());
+        System.out.println(strings);
+    }
+
+
+    @Test
+    public void test11123() throws Exception {
+        String str = "70349558,70349559,70349560";
+        String str1 = "70349558";
+        String[] split = str1.split(",");
+        System.out.println(Arrays.toString(split));
+        //mobileNos去重
+
+    }
+
+
+    @Test
+    public void test111233() throws Exception {
+        System.out.println(new BigDecimal(2).compareTo(new BigDecimal(1)));
+
+    }
+
     public static List<Employee> createData() {
         List<Employee> employees = Arrays.asList(
-                new Employee("张三", 18, 9999.99),
+                new Employee("张三", 25, 9999.99),
                 new Employee("李四", 38, 5555.55),
                 new Employee("王五", 60, 6666.66),
                 new Employee("赵六", 16, 7777.77),
@@ -272,7 +417,9 @@ public class TestDemo {
                 new Employee("陈龙", 67, 53273.21),
                 new Employee("李连杰", 45, 12386.21),
                 new Employee("张艺兴", 32, 5632.55),
-                new Employee("黄渤", 25, 4532.66)
+                new Employee("黄渤", 25, 4532.66),
+	            new Employee("黄渤", 245, 4532.66),
+	            new Employee("李连杰", 243, 4532.66)
 
         );
         return employees;

@@ -5,10 +5,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -107,6 +104,36 @@ public class TestTime {
 
     }
 
+    @Test
+    public void getCurrentDate(){
+        LocalDate today = LocalDate.now();
+        System.out.println("Today's Local date : " + today);
+
+        //这个是作为对比
+        Date date = new Date();
+        System.out.println(date);
+    }
+
+
+    //获取年、月、日信息
+    @Test
+    public void getDetailDate(){
+        LocalDate today = LocalDate.now();
+        int year = today.getYear();
+        int month = today.getMonthValue();
+        int day = today.getDayOfMonth();
+
+        System.out.printf("Year : %d  Month : %d  day : %d t %n", year, month, day);
+    }
+
+
+    //处理特定日期
+    @Test
+    public void handleSpecilDate(){
+        LocalDate dateOfBirth = LocalDate.of(2018, 01, 21);
+        System.out.println("The specil date is : " + dateOfBirth);
+    }
+
 
     public static Date test45(Date date)  {
         try {
@@ -156,8 +183,33 @@ public class TestTime {
         }
     }
 
+    @Test
+    public void test1111(){
+        Date date1 = new Date();
+        Date date2 = new Date();
+        matchSameMonth(date1, date2);
+
+    }
 
 
+    private  boolean matchSameMonth(Date date1, Date date2) {
+        if (null == date1 || null == date2){
+            return false;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
+        String str1 = simpleDateFormat.format(date1);
+        String str2 = simpleDateFormat.format(date2);
+        if(str1.equals(str2)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Test
+    public  void matchSameMont1h() {
+        long l = System.currentTimeMillis();
+        System.out.println(l);
+    }
 }
 
 
