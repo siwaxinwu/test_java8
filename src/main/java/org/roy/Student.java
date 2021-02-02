@@ -1,45 +1,44 @@
 package org.roy;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
-/**
- * description：
- * author：dingyawu
- * date：created in 11:16 2020/8/27
- * history:
- */
-
+/** description： author：dingyawu date：created in 11:16 2020/8/27 history: */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student implements Serializable {
 
-    private static final long serialVersionUID = -6060343040263809614L;
+  private static final long serialVersionUID = -6060343040263809614L;
 
-    private String userName;
-    private String password;
-    private String year;
+  private String userName;
+  private String password;
+  private String year;
 
-    public String getUserName() {
-        return userName;
-    }
+  public String getUserName() {
+    return userName;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public String getYear() {
-        return year;
-    }
+  public String getYear() {
+    return year;
+  }
 
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-
+  public void setYear(String year) {
+    this.year = year;
+  }
 }
