@@ -5,12 +5,12 @@ import org.roy.entity.Employee;
 import org.roy.entity.Light;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 /** description： 开发额外测试 author：dingyawu date：created in 13:57 2020/10/28 history: */
 public class ExtTest {
@@ -117,5 +117,137 @@ public class ExtTest {
   public void testLocaldate1() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
     System.out.println(LocalDate.now().format(formatter));
+  }
+
+  @Test
+  public void testString() {
+    Integer integer = null;
+    String s = String.valueOf(integer);
+    System.out.println(s);
+    String string = integer.toString();
+    System.out.println(string);
+  }
+
+  @Test
+  public void testMap() {
+    Map<String, List<String>> map = new HashMap();
+
+    List<String> classify = map.get("java框架");
+    if (Objects.isNull(classify)) {
+      classify = new ArrayList<>();
+      classify.add("Spring");
+      map.put("java框架", classify);
+    } else {
+      classify.add("Spring");
+    }
+    System.out.println(map);
+  }
+
+  /** computeIfAbsent的方法，实际上都是一个计算，当你拿到的value是空的，自己new一个 ，等价于上一个 */
+  @Test
+  public void testMap1() {
+    Map<String, List<String>> map = new HashMap();
+    List<String> list = new ArrayList<>();
+    list.add("roy");
+    map.put("java", list);
+    map.computeIfAbsent("java1", key -> new ArrayList<>()).add("Spring");
+    System.out.println(map);
+  }
+
+  @Test
+  public void testMap2() {
+    Map<String, Integer> countMap = new HashMap();
+    Integer count = countMap.get("java");
+    if (Objects.isNull(count)) {
+      countMap.put("java", 1);
+    } else {
+      countMap.put("java", count++);
+    }
+  }
+
+  /** merge的用法，等价于上一个 */
+  @Test
+  public void testMap3() {
+    Map<String, Integer> countMap = new HashMap();
+    Integer count = countMap.getOrDefault("java", 0);
+    countMap.put("java", count + 1);
+
+    countMap.merge("java", 1, Integer::sum);
+    System.out.println(countMap);
+  }
+
+  /** 测试map.getOrDefault */
+  @Test
+  public void testMap4() {
+    Map<String, Integer> map = new HashMap();
+    map.put("java", 1);
+    map.put("mysql", 2);
+    Integer result = map.getOrDefault("java1", 6);
+    System.out.println(result);
+  }
+
+  @Test
+  public void testMap5() {
+    HashMap map = new HashMap();
+  }
+
+  @Test
+  public void test234() {
+    System.out.println(new Random().nextInt(4));
+    System.out.println(ExtTest.getRandomBigDecimal(new BigDecimal("10"), new BigDecimal("20")));
+
+    System.out.println(ExtTest.getPercent(new Random().nextInt(100), new Random().nextInt(100)));
+  }
+
+  /** 测试长参数 */
+  @Test
+  public void testLongStr() {
+    String[] strings = {"Holis", "Hollis", "www.hollischuang.com", "QQ907607222"};
+
+    print(strings);
+    String[] strings1 = new String[2];
+    strings1[0] = "jack";
+    strings1[1] = "tom";
+    print(strings1);
+  }
+
+  public static void print(String... strs) {
+    for (int i = 0; i < strs.length; i++) {
+      System.out.println(strs[i]);
+    }
+  }
+
+  /**
+   * 获取任意的bigdecimal
+   *
+   * @param min 最小值
+   * @param max 马克斯
+   * @return {@link BigDecimal}
+   */
+  public static BigDecimal getRandomBigDecimal(BigDecimal min, BigDecimal max) {
+    float minF = min.floatValue();
+    float maxF = max.floatValue();
+
+    // 生成随机数
+    BigDecimal db = new BigDecimal(Math.random() * (maxF - minF) + minF);
+
+    // 返回保留两位小数的随机数。不进行四舍五入
+    return db.setScale(2, BigDecimal.ROUND_DOWN);
+  }
+
+  /**
+   * 获取百分比
+   *
+   * @param x x
+   * @param y y
+   * @return {@link String}
+   */
+  public static String getPercent(int x, int y) {
+    double d1 = x * 1.0;
+    double d2 = y * 1.0;
+    NumberFormat percentInstance = NumberFormat.getPercentInstance();
+    // 设置保留几位小数，这里设置的是保留两位小数
+    percentInstance.setMinimumFractionDigits(2);
+    return percentInstance.format(d1 / d2);
   }
 }

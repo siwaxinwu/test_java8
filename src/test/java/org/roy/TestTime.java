@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -210,6 +213,26 @@ public class TestTime {
         long l = System.currentTimeMillis();
         System.out.println(l);
     }
+
+	@Test
+	public  void matchSameMont1h1() {
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM");
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+				.appendPattern("yyyy-MM")
+				.parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+				.toFormatter();
+		LocalDate date = LocalDate.parse("2020-11", formatter);
+        System.out.println(date);
+
+    System.out.println(date.format(formatter1));
+		/*DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM");
+		YearMonth ym = YearMonth.parse("2020-04", fmt);
+		LocalDate dt = ym.atEndOfMonth();
+    System.out.println(dt);*/
+	}
+
+
+
 }
 
 
