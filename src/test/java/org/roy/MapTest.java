@@ -70,4 +70,17 @@ public class MapTest {
   public void testMap5() {
     System.out.println(MapTest.class.getName());
   }
+
+  @Test
+  public void testMap6() {
+    Map<Integer, String> map = new LinkedHashMap<>();
+    map.put(1, "tom1");
+    map.put(2, "tom2");
+    map.put(6, "tom3");
+    map.put(4, "tom4");
+    map.put(5, "tom5");
+    for (Map.Entry entry : map.entrySet()) {
+      System.out.println(entry.getKey());
+    }
+  }
 }

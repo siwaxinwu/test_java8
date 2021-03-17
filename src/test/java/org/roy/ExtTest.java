@@ -5,6 +5,7 @@ import org.roy.entity.Employee;
 import org.roy.entity.Light;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -209,6 +210,30 @@ public class ExtTest {
     strings1[0] = "jack";
     strings1[1] = "tom";
     print(strings1);
+  }
+
+  @Test
+  public void testBigDecimalRemoveZero() {
+    BigDecimal bigDecimal = new BigDecimal("1000.000");
+    System.out.println(bigDecimal.stripTrailingZeros().toPlainString());
+
+    DecimalFormat df = new DecimalFormat("0.00%");
+    BigDecimal d = new BigDecimal(0.666);
+    String percent = df.format(d);
+  }
+
+  @Test
+  public void testPercent() {
+    DecimalFormat df = new DecimalFormat("###.##%");
+    BigDecimal d = new BigDecimal("66");
+    String percent = df.format(d);
+    System.out.println(percent);
+  }
+
+  @Test
+  public void testPercent1() {
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    System.out.println(decimalFormat.format(12.0));
   }
 
   public static void print(String... strs) {
