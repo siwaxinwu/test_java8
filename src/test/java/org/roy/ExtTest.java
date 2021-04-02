@@ -242,6 +242,38 @@ public class ExtTest {
     }
   }
 
+  @Test
+  public void stringTest() {
+
+    Integer[] array = {1, 2, 3, 4, 5};
+    List<Integer> list = Arrays.asList(array);
+    int size = list.size();
+    List<String> result = new ArrayList<>();
+    DFS(list, "", result, size);
+    System.out.println(result);
+  }
+
+  @Test
+  public void stringTest1() {
+
+    String string = "12345";
+    System.out.println(string.indexOf("1"));
+    char c = string.charAt(0);
+    Integer integer = Integer.valueOf(c);
+  }
+
+  public static void DFS(List<Integer> list, String prefix, List<String> result, Integer size) {
+    if (prefix.length() == size) {
+      result.add(prefix);
+    }
+
+    for (int i = 0; i < list.size(); i++) {
+      List<Integer> temp = new LinkedList<Integer>(list);
+      int item = (int) temp.remove(i); // 取出被删除的元素，这个元素当作一个组合用掉了
+      DFS(temp, prefix + item, result, size);
+    }
+  }
+
   /**
    * 获取任意的bigdecimal
    *
@@ -274,5 +306,22 @@ public class ExtTest {
     // 设置保留几位小数，这里设置的是保留两位小数
     percentInstance.setMinimumFractionDigits(2);
     return percentInstance.format(d1 / d2);
+  }
+
+  public List<String> combination(List<String> inputList) {
+    List<String> resList = new ArrayList<>();
+    combinationInt(inputList, resList, 0, new char[inputList.size()]);
+    return resList;
+  }
+
+  private void combinationInt(List<String> inputList, List<String> resList, int ind, char[] arr) {
+    if (ind == inputList.size()) {
+      resList.add(new String(arr));
+      return;
+    }
+    for (char c : inputList.get(ind).toCharArray()) {
+      arr[ind] = c;
+      combinationInt(inputList, resList, ind + 1, arr);
+    }
   }
 }
