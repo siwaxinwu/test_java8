@@ -32,6 +32,7 @@ public class RemDuplicateTest {
   }
 
 	/**
+     *
 	 * 根据对象里面的两个字段去重
 	 *
 	 */
