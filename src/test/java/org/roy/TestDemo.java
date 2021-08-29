@@ -1,5 +1,6 @@
 package org.roy;
 
+import com.sun.javafx.image.IntPixelGetter;
 import org.junit.Test;
 import org.roy.entity.Employee;
 import org.roy.entity.Status;
@@ -136,7 +137,9 @@ public class TestDemo {
   public void test1() {
     List<Employee> data = TestDemo.createData();
     List<Employee> result =
-        data.stream().filter((Employee ele) -> ele.getAge() > 30).collect(Collectors.toList());
+        data.stream()
+            .filter((Employee ele) -> ele.getAge() > 30 || ele.getAge() < 20)
+            .collect(Collectors.toList());
     System.out.println(result);
     System.out.println("------------------------------------------------------------");
     List<Employee> result2 =
@@ -417,6 +420,12 @@ public class TestDemo {
   }
 
   @Test
+  public void test152() {
+    String s = new BigDecimal("0.0000").stripTrailingZeros().toPlainString();
+    System.out.println(s);
+  }
+
+  @Test
   public void test111() throws Exception {
     // 在初始化HashMap 的时候，应该尽量指定其大小。尤其
     // 是当你已知map 中存放的元素个数时。（《阿里巴巴Java 开发规约》）
@@ -444,18 +453,40 @@ public class TestDemo {
   }
 
   @Test
+  public void test11122() throws Exception {
+    List<String> list = new ArrayList<>();
+    System.out.println(list.get(0));
+  }
+
+  @Test
   public void test11123() throws Exception {
     String str = "70349558,70349559,70349560";
     String str1 = "70349558";
     String[] split = str1.split(",");
     System.out.println(Arrays.toString(split));
     // mobileNos去重
-
   }
+
+
 
   @Test
   public void test111233() throws Exception {
-    System.out.println(new BigDecimal(2).compareTo(new BigDecimal(1)));
+    List<Integer> list = new ArrayList<>();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    list.add(4);
+    list.add(5);
+    for(Integer integer: list){
+      if (integer == 2){
+        list.remove(integer);
+        System.out.println("list删除" + integer + "成功");
+        System.out.println("删除后的队列" + list);
+        return;
+      }
+    }
+
+
   }
 
   public static List<Employee> createData() {

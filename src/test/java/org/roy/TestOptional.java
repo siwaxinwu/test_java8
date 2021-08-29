@@ -39,8 +39,7 @@ public class TestOptional {
     String str = null;
     String s = Optional.ofNullable(str).orElseThrow(IllegalArgumentException::new);
     System.out.println(s);
-     String s1 = Optional.ofNullable(str).orElseThrow(() -> {
-       return new IllegalArgumentException();});
+     String s1 = Optional.ofNullable(str).orElseThrow(IllegalArgumentException::new);
   }
 
   public String getDefaultName() {

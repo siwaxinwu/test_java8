@@ -31,31 +31,37 @@ public class RemDuplicateTest {
     System.out.println(employees);
   }
 
-	/**
-     *
-	 * 根据对象里面的两个字段去重
-	 *
-	 */
-	@Test
-	public void testRemoveDuplicate2() {
-		List<Employee> data = TestDemo.createData();
-		System.out.println(data.size());
-		List<Employee> employees =
-				data.stream()
-						.collect(
-								Collectors.collectingAndThen(
-										Collectors.toCollection(
-												() -> new TreeSet<>(Comparator.comparing(employee -> employee.getName() + employee.getAge()))),
-										ArrayList::new));
-		System.out.println(employees.size());
-		System.out.println(employees);
-	}
-
-
+  /** 根据对象里面的两个字段去重 */
+  @Test
+  public void testRemoveDuplicate2() {
+    List<Employee> data = TestDemo.createData();
+    System.out.println(data.size());
+    List<Employee> employees =
+        data.stream()
+            .collect(
+                Collectors.collectingAndThen(
+                    Collectors.toCollection(
+                        () ->
+                            new TreeSet<>(
+                                Comparator.comparing(
+                                    employee -> employee.getName() + employee.getAge()))),
+                    ArrayList::new));
+    System.out.println(employees.size());
+    System.out.println(employees);
+  }
 
   /** 一个对象整体去重 */
   @Test
   public void testObject() {
+    List<Employee> data = TestDemo.createData();
+    System.out.println(data.size());
+    List<Employee> employees = data.stream().distinct().collect(Collectors.toList());
+    System.out.println(employees.size());
+    System.out.println(employees);
+  }
+
+  @Test
+  public void testObject1() {
     List<Employee> data = TestDemo.createData();
     System.out.println(data.size());
     List<Employee> employees = data.stream().distinct().collect(Collectors.toList());

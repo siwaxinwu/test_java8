@@ -45,14 +45,16 @@ public class MapTest {
     }
   }
 
-  /** merge的用法，等价于上一个 */
+  /** merge的用法，等价于上一个 ，统计字符串的用法 */
   @Test
   public void testMap3() {
     Map<String, Integer> countMap = new HashMap();
-    Integer count = countMap.getOrDefault("java", 0);
-    countMap.put("java", count + 1);
-
-    countMap.merge("java", 1, Integer::sum);
+    /*countMap.merge("java", 1, Integer::sum);
+    System.out.println(countMap);*/
+    String str = "abcdabcdae";
+    for (int i = 0; i < str.length(); i++) {
+      countMap.merge(str.substring(i, i + 1), 1, Integer::sum);
+    }
     System.out.println(countMap);
   }
 

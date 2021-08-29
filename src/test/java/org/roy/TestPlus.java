@@ -74,11 +74,9 @@ public class TestPlus {
 
   @Test
   public void test15() {
-    List<Employee> data = TestDemo.createData();
-    //        List<Employee> result =
-    // Stream.of(data).distinct(Employee::getSalary).collect(Collectors.toList());
-    //        data.stream().filter(disti);
-
+    BigDecimal bigDecimal = new BigDecimal("1.0000");
+    int i = bigDecimal.intValue();
+    System.out.println(i);
   }
 
   @Test
@@ -207,8 +205,39 @@ public class TestPlus {
   }
 
   @Test
+  public void test322() throws IOException {
+    BigDecimal bigDecimal = new BigDecimal("12.4");
+    String s = bigDecimal.stripTrailingZeros().toPlainString();
+    System.out.println(s);
+  }
+
+  @Test
   public void test2322222() throws IOException {
     boolean startWithNumber = TestPlus.isStartWithNumber("a23245");
+  }
+
+  @Test
+  public void test569() {
+    Object[] res =
+        Stream.of(1, 2, 3, 4, 5, 6, 7, 8).filter(i -> i % 2 == 0).filter(i -> i > 3).toArray();
+    System.out.println(Arrays.toString(res));
+  }
+
+  @Test
+  public void translateDate2Day() {
+    Integer billDate = 202117;
+    String substring = String.valueOf(billDate).substring(4);
+    System.out.println(Integer.valueOf(substring));
+  }
+
+  @Test
+  public void test5693() {
+    List<Integer> list = new ArrayList<>();
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    boolean result = list.contains(null);
+    System.out.println(result);
   }
 
   private BigDecimal compute(Long v1, Long v2) {

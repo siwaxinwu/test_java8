@@ -24,8 +24,8 @@ public class DiguiTest {
             new Menu(6, "根节点2", 1),
             new Menu(7, "根节点2.1", 6),
             new Menu(8, "根节点2.2", 6),
-            new Menu(9, "根节点2.2.1", 7),
-            new Menu(10, "根节点2.2.2", 7),
+            new Menu(9, "根节点2.2.1", 8),
+            new Menu(10, "根节点2.2.2", 8),
             new Menu(11, "根节点3", 1),
             new Menu(12, "根节点3.1", 11));
 
