@@ -23,9 +23,19 @@ public class ExtTest {
 
   @Test
   public void test111() {
+    System.out.println(getTodayMills());
     System.out.println(Light.YELLOW.ordinal());
   }
 
+  public static long getTodayMills() {
+    //设置时区
+    Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    return calendar.getTimeInMillis();
+  }
   @Test
   public void testFormat() {
     System.out.println(String.format("%-10s", "jack356555585868975").replace(' ', '_'));

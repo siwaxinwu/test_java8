@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+actor Guest as g
+package Professional {
+    actor Chief as c
+    actor "Food Critic" as fc
+}
+package Restaurant {
+    usecase "Eat Food" as uc1
+    usecase "Pay For Food" as uc2
+    usecase "Drink" as uc3
+    usecase "Review" as uc4
+}
+g--> uc1
+g--> uc2
+g--> uc3
+fc--> uc4
+@enduml
+
+
+left to right direction表示按从左到右的顺序绘制用例图，默认是从上到下；
+通过package可以对角色和用例进行分组；
+通过actor可以定义用户；
+通过usecase可以定义用例；
+角色和用例之间的关系可以使用-->来表示。

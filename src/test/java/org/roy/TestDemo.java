@@ -6,9 +6,11 @@ import org.roy.entity.Employee;
 import org.roy.entity.Status;
 import org.roy.inter.MyFunction;
 
+import javax.swing.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,6 +25,15 @@ import java.util.stream.Stream;
 /** description： author：dingyawu date：created in 16:52 2020/7/29 history: */
 public class TestDemo {
 
+
+
+
+
+  @Test
+  public void testToMa1p() {
+    String itingUrl = "iting://open?msg_type=52&live_type=" + 1 + "&liveroom_id=" + 2;
+    System.out.println(itingUrl);
+  }
   /**
    * 将一条员工记录转化为map（string：name,value: employee记录） Function.identity()返回一个输出跟输入一样的Lambda表达式对象，等价于形如t
    * -> t形式的Lambda表达式 测试toMap和groupBy的区别
@@ -34,7 +45,7 @@ public class TestDemo {
     data.stream()
         .collect(Collectors.toMap(Employee::getAge, Function.identity(), (ele1, ele2) -> ele2));*/
     Map<Integer, Long> result =
-        data.stream().collect(Collectors.groupingBy(Employee::getAge, Collectors.counting()));
+            data.stream().collect(Collectors.groupingBy(Employee::getAge, Collectors.counting()));
     System.out.println(result);
   }
 

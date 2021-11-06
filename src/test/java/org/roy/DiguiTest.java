@@ -65,4 +65,15 @@ public class DiguiTest {
             .collect(Collectors.toList());
     return children;
   }
+  @Test
+    public void testThrow() throws Exception {
+      try{
+      System.out.println(123);
+        throw new Exception("throw exception in try");
+      }catch (Exception e){
+          throw new Exception("throw exception");
+      }finally{
+         System.out.println("execute finally");
+      }
+    }
 }

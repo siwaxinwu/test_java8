@@ -1,0 +1,23 @@
+@startuml
+class Person {
+    # String name
+    # Integer age
+    + void move()
+    + void say()
+}
+class Student {
+    - String studentNo
+    + void study()
+}
+class Teacher {
+    - String teacherNo
+    + void teach()
+}
+Person <|-- Student
+Person <|-- Teacher
+@enduml
+
+本类图关键说明如下：
+通过class可以定义类；
+通过在属性和方法左边加符号可以定义可见性，-表示private，#表示protected，+表示public；
+通过<|--表示类之间的继承关系。

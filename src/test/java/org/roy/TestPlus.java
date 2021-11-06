@@ -56,6 +56,21 @@ public class TestPlus {
   }
 
   @Test
+  public void test122() {
+    List<Employee> data = TestDemo.createData();
+    Iterator<Employee> iterator = data.iterator();
+    while (iterator.hasNext()){
+      System.out.println(iterator.next());
+      int i = new Random().nextInt();
+      if (i > 100){
+        continue;
+      }
+      System.out.println(123);
+    }
+
+  }
+
+  @Test
   public void test13() {
     List<Employee> data = TestDemo.createData();
     double result = data.stream().mapToDouble(Employee::getSalary).max().orElse(0.00);

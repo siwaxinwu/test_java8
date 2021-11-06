@@ -1,0 +1,38 @@
+@startuml
+title Oauth2令牌颁发之授权码模式
+
+actor User as user
+participant "User Agent" as userAgent
+participant "Client" as client
+participant "Auth Login" as login
+participant "Auth Server" as server
+
+autonumber
+user->userAgent:访问客户端
+activate userAgent
+userAgent->login:重定向到授权页面+clientId+redirectUrl
+activate login
+login->server:用户名+密码+clientId+redirectUrl
+activate server
+server-->login:返回授权码
+login-->userAgent:重定向到redirectUrl+授权码code
+deactivate login
+userAgent->client:使用授权码code换取令牌
+activate client
+client->server:授权码code+clientId+clientSecret
+server-->client:颁发访问令牌accessToken+refreshToken
+deactivate server
+client-->userAgent:返回访问和刷新令牌
+deactivate client
+userAgent--> user:令牌颁发完成
+deactivate userAgent
+@enduml
+
+title可以用于指定UML图的标题；
+通过actor可以声明人形的参与者；
+通过participant可以声明普通类型的参与者；
+通过as可以给参与者取别名；
+通过->可以绘制参与者之间的关系，虚线箭头可以使用-->；
+在每个参与者关系后面，可以使用:给关系添加说明；
+通过autonumber我们可以给参与者关系自动添加序号；
+通过activate和deactivate可以指定参与者的生命线。
