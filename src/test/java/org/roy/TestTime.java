@@ -221,16 +221,6 @@ public class TestTime {
   }
 
   @Test
-  public void testDebug() {
-    List<Employee> data = TestDemo.createData();
-    for (int i = 0; i < data.size(); i++) {
-      Employee employee = data.get(i);
-      String name = employee.getName();
-      System.out.println(name);
-    }
-  }
-
-  @Test
   public void testRemObjectWithSeq() {
     List<Employee> data = TestDemo.createData();
     for (int i = 0; i < data.size(); i++) {

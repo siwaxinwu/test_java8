@@ -1,17 +1,23 @@
 package org.roy;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 import org.roy.entity.Employee;
 import org.roy.entity.User;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * description： optional的用法
  * author：dingyawu
  * date：created in 10:56 2020/7/30 history: */
 public class TestOptional {
+
+
+
   /**
    * optional的简单使用
    *
@@ -114,10 +120,36 @@ public class TestOptional {
    */
   @Test
   public void test1112343() throws Exception {
-    User user = new User();
-    user.setName("roy");
-    String city = Optional.ofNullable(user).map(u-> u.getName()).get();
-    System.out.println(city);
+    String str = "newretail-anchor-10-live-nil-liveSessionId*193894|type*1|uid*203504|sessionId*1008676";
+    String[] split = str.split("\\|");
+    System.out.println(Arrays.toString(split));
+  }
+
+  @Test
+  public void test111234322() throws Exception {
+    System.out.println(2 < 1 ? -1 : 3 > 2 ? 2 : 1);
+  }
+
+
+
+  public Boolean judgevalidTime(){
+    long time = new Date().getTime();
+    String  startTime = "1636473500000";
+    if (time > Long.parseLong(startTime) ){
+      return true;
+    }
+    return false;
+  }
+
+
+  public Boolean macthConditiion(String anchorId){
+
+    Map<Long, Integer> map = new HashMap<>();
+    map.put(1L, 200);
+    map.put(3L, 200);
+
+    return map.keySet().stream().anyMatch(item -> Objects.equals(anchorId, String.valueOf(item)));
+
   }
 
 

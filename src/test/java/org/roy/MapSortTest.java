@@ -51,4 +51,20 @@ public class MapSortTest {
       System.out.println(entry.getKey());
     }
   }
+
+  @Test
+  public void testMapStr() {
+    Map<Integer, String> map = new HashMap<>();
+    map.put(1, "tom1");
+    map.put(2, "tom2");
+    map.put(6, "tom3");
+    map.put(4, "tom4");
+    map.put(5, "tom5");
+    Map<Integer, String> map1 = null;
+    map.putAll(map1);
+
+
+  }
+
+
 }

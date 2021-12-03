@@ -231,12 +231,7 @@ public class TestPlus {
     boolean startWithNumber = TestPlus.isStartWithNumber("a23245");
   }
 
-  @Test
-  public void test569() {
-    Object[] res =
-        Stream.of(1, 2, 3, 4, 5, 6, 7, 8).filter(i -> i % 2 == 0).filter(i -> i > 3).toArray();
-    System.out.println(Arrays.toString(res));
-  }
+
 
   @Test
   public void translateDate2Day() {

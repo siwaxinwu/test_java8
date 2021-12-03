@@ -58,7 +58,10 @@ public class MapTest {
     System.out.println(countMap);
   }
 
-  /** 测试map.getOrDefault */
+  /** 测试map.getOrDefault
+   * 曾经看到有同学这样写的，没必要
+   *
+   * */
   @Test
   public void testMap4() {
     Map<String, Integer> map = new HashMap();
@@ -66,6 +69,9 @@ public class MapTest {
     map.put("mysql", 2);
     Integer result = map.getOrDefault("java1", 6);
     System.out.println(result);
+    Integer roy = map.get("roy");
+    //Integer roy1 = map.getOrDefault("roy", null);
+    System.out.println(roy);
   }
 
   @Test
