@@ -32,6 +32,16 @@ public class RandomTest {
     }
 
 	@Test
+	public void test111(){
+    System.out.println(getResult(new Integer[] {1, 2}));
+	}
+
+	public static List<Integer> getResult(Integer ... params){
+		 return Arrays.stream(params).map(param -> param + 1).collect(Collectors.toList());
+
+	}
+
+	@Test
 	public void test11(){
 		Random random = new Random();
 		for (int i = 0; i < 5; i++) {

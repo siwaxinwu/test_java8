@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** description： author：dingyawu date：created in 16:09 2020/7/30 history: */
 public class TestTime {
@@ -241,6 +242,11 @@ public class TestTime {
   public void testFori() {
     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 23, 23, 453);
     List<List<Integer>> lists = splitList(list, 3);
+  }
+
+  @Test
+  public void testFor22() {
+    System.out.println(0x05 << 24 | 0x69 << 16 | 0x7b << 8 | 0x22);
   }
 
   public static List<List<Integer>> splitList(List<Integer> list, int len) {
