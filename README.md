@@ -17,8 +17,8 @@
 |演示idea稍微高级一些的调试技巧|org.roy.IdeaDebugTest|
 |读取文件的N种方式，按行读取 |org.roy.PointTest|
 
-
-
+-------
+first read file
 
 
 
