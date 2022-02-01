@@ -15,6 +15,7 @@ public class GitTest {
   @Test
   public void testHex4() throws UnsupportedEncodingException {
     System.out.println("first");
+    System.out.println("second");
   }
 
 
