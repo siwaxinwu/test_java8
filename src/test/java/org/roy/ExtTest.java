@@ -23,8 +23,81 @@ public class ExtTest {
 
   @Test
   public void test111() {
-    System.out.println(getTodayMills());
-    System.out.println(Light.YELLOW.ordinal());
+    String str = "{\"content\":{\"mic\": 2,\n" +
+            "\"micno\":0,\n" +
+            "\"ts\":\n" +
+            "1 \n" +
+            ".\n" +
+            "6\n" +
+            "3\n" +
+            "7\n" +
+            "6\n" +
+            "3\n" +
+            "7\n" +
+            "7\n" +
+            "7\n" +
+            "4\n" +
+            "1\n" +
+            "6\n" +
+            "9\n" +
+            "E\n" +
+            "1\n" +
+            "2\n" +
+            ",\n" +
+            "\"\n" +
+            "u\n" +
+            "i\n" +
+            "d\n" +
+            "\"\n" +
+            ":\n" +
+            "3\n" +
+            "3\n" +
+            "5\n" +
+            "5\n" +
+            "5\n" +
+            "2\n" +
+            "1\n" +
+            "1\n" +
+            "2\n" +
+            ",\n" +
+            "\"\n" +
+            "u\n" +
+            "s\n" +
+            "e\n" +
+            "r\n" +
+            "T\n" +
+            "y\n" +
+            "p\n" +
+            "e\n" +
+            "\"\n" +
+            ":\n" +
+            "0\n" +
+            ",\n" +
+            "\"\n" +
+            " v\n" +
+            "o\n" +
+            "l\n" +
+            "u\n" +
+            "m\n" +
+            " e\n" +
+            "\"\n" +
+            ":\n" +
+            "0\n" +
+            ".\n" +
+            "0\n" +
+            "}\n" +
+            ",\n" +
+            "\"\n" +
+            "t\n" +
+            "y\n" +
+            "p\n" +
+            "e\n" +
+            "\"\n" +
+            ":\n" +
+            "1\n" +
+            "}";
+    String replace = str.replace("\n", "");
+    System.out.println(replace);
   }
 
   public static long getTodayMills() {

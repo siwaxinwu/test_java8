@@ -16,9 +16,8 @@
 |演示string去掉换行符然后填入apollo|org.roy.ExtTest.stringDorpn|
 |演示idea稍微高级一些的调试技巧|org.roy.IdeaDebugTest|
 |读取文件的N种方式，按行读取 |org.roy.PointTest|
-
+|测试获取本机IP|org.roy.net.NetTest.test1|
 -------
-first read file
 
 
 

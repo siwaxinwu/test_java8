@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+activate Bob
+Bob --> x:testa
+x --> Bob:return
+deactivate Bob
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml
+
+activate 和deactivate用于表示生命者的参与活动

@@ -14,9 +14,10 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /** description： 演示idea稍微高级一些的调试技巧
- * 1.返回上一步(方框上边加个X)。从子方法退到父方法 drop frame：丢弃当前栈帧
+ * 1.返回上一步(方框上边加个X)。从子方法退到父方法 drop frame：丢弃当前栈帧，调用链回退
  * 2.for循环条件断点,条件表达式判断
  * 3.多线程调试:psvm
  * 4.流的调试
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  * 7.异常断点的运用
  * plus.方法断点的应用，有时候能够提高效率
  * 8.字段断点，监控写
+ * 10.可以在debug的时候改变变量值（右击set value）
  * author：dingyawu
  * date：created in 13:57 2020/10/28
  * history:
@@ -56,7 +58,12 @@ public class IdeaDebugTest {
   @Test
   public void test4() {
     List<Employee> datas = TestDemo.createData();
-    List<Integer> ages = datas.stream().filter(data -> data.getName().startsWith("陈")).filter(data -> data.getSalary() > 250000).map(Employee::getAge).collect(Collectors.toList());
+    List<Integer> ages = datas
+            .stream()
+            .filter(data -> data.getName().startsWith("陈")).filter(data -> data.getSalary() > 250000)
+            .sorted()
+            .map(Employee::getAge)
+            .collect(Collectors.toList());
     System.out.println(ages);
   }
 
@@ -83,6 +90,13 @@ public class IdeaDebugTest {
 
   @Test
   public void test8() {
+    Employee roy = new Employee("roy", 23, 200000.0, Status.WORKING);
+    roy.setAge(20);
+    System.out.println(roy);
+  }
+
+  @Test
+  public void test10() {
     Employee roy = new Employee("roy", 23, 200000.0, Status.WORKING);
     roy.setAge(20);
     System.out.println(roy);

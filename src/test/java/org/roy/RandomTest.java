@@ -4,6 +4,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import org.roy.entity.Employee;
 import org.roy.entity.Light;
+import org.roy.entity.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -67,6 +68,55 @@ public class RandomTest {
 		// characters including numeric and alphabetic characters.
 		result = RandomStringUtils.random(32, 0, 20, true, false, "qw32rfHIJk9iQ8Ud7h0X".toCharArray());
 		System.out.println("random = " + result);
+	}
+
+	@Test
+	public void test23(){
+		byte[] bytes=new byte[3];
+		bytes[0] = (byte) 0;
+		bytes[1] = (byte) 3;
+		bytes[2] = (byte) 34;
+		Integer result = byteArray2Int(bytes[0],bytes[1], bytes[2]);
+		System.out.println(result);
+		byte[] result1 = int2Bytes(result);
+		System.out.println(Arrays.toString(result1));
+
+	}
+
+
+	public static byte[] int2Bytes(int param) {
+		byte[] bytes=new byte[4];
+		bytes[0] = (byte) (param>>24);
+		bytes[1] = (byte) (param>>16);
+		bytes[2] = (byte) (param>>8);
+		bytes[3] = (byte) (param);
+		return bytes;
+    }
+
+	public static Integer byteArray2Int(Byte ... bytes){
+		String tmpStr = Arrays.stream(bytes)
+				.map(byteEle -> Integer.toBinaryString((byteEle & 0xFF) + 0x100).substring(1))
+				.collect(Collectors.joining());
+		return Integer.parseInt(tmpStr, 2);
+	}
+
+
+	public static void testtt(int number){
+		number = 10;
+	}
+
+	public static void testUser(User user){
+		user.setName("roy");
+	}
+
+	@Test
+	public void test232(){
+    	String userName = "tom";
+		User user = new User();
+		user.setName(userName);
+		testUser(user);
+		System.out.println(user);
+    	System.out.println(userName);
 	}
 
 
