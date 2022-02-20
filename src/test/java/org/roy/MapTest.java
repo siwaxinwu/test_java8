@@ -1,10 +1,19 @@
 package org.roy;
 
+import org.checkerframework.checker.units.qual.K;
 import org.junit.Test;
 
 import java.util.*;
 
-/** description： 开发额外测试 author：dingyawu date：created in 13:57 2020/10/28 history: */
+/**
+ *
+ * description：  map的新用法测试
+ * author：dingyawu
+ * date：created in 13:57 2020/10/28
+ * history:
+ *
+ *
+ * */
 public class MapTest {
 
   @Test
@@ -22,15 +31,42 @@ public class MapTest {
     System.out.println(map);
   }
 
-  /** computeIfAbsent的方法，实际上都是一个计算，当你拿到的value是空的，自己new一个 ，等价于上一个 */
+  /**
+   *
+   * computeIfAbsent的方法，实际上都是一个计算，当你拿到的value是空的，自己new一个 ，等价于上一个
+   * 取出的value的类型是List，同样是null的时候，可以给一个默认值，可以.add往value中添加元素
+   * */
   @Test
-  public void testMap1() {
+  public void testomputeIfAbsent() {
     Map<String, List<String>> map = new HashMap();
     List<String> list = new ArrayList<>();
     list.add("roy");
     map.put("java", list);
-    // map.computeIfAbsent("java", key -> new ArrayList<>()).add("Spring");
-    map.computeIfAbsent("java1", key -> new ArrayList<>());
+    map.computeIfAbsent("java", key -> new ArrayList<>()).add("Spring");
+    List<String> list1 = new ArrayList<>();
+    list1.add("tony");
+    map.computeIfAbsent("java1", key -> list1).add("mybatis");
+    System.out.println(map);
+  }
+
+  /**
+   * 统计一个字符串各个字符出现的次数
+   *
+   */
+  @Test
+  public void testMapCompute() {
+    Map<String, Integer> map = new HashMap();
+    String param = "roy you are the best";
+    String[] split = param.split("");
+    Arrays.stream(split).forEach(charactor -> {
+      map.compute(charactor, (k, v) -> {
+        if (map.get(k) == null ){
+          return 1;
+        }else {
+          return v + 1;
+        }
+      });
+    });
     System.out.println(map);
   }
 
@@ -45,13 +81,16 @@ public class MapTest {
     }
   }
 
-  /** merge的用法，等价于上一个 ，统计字符串的用法 */
+  /**
+   * merge的用法，等价于上一个 ，统计字符串的用法
+   *
+   * */
   @Test
   public void testMap3() {
     Map<String, Integer> countMap = new HashMap();
     /*countMap.merge("java", 1, Integer::sum);
     System.out.println(countMap);*/
-    String str = "abcdabcdae";
+    String str = "roy you are the best";
     for (int i = 0; i < str.length(); i++) {
       countMap.merge(str.substring(i, i + 1), 1, Integer::sum);
     }
@@ -75,12 +114,12 @@ public class MapTest {
   }
 
   @Test
-  public void testMap5() {
+  public void testMapName() {
     System.out.println(MapTest.class.getName());
   }
 
   @Test
-  public void testMap6() {
+  public void testLinkedHashMap() {
     Map<Integer, String> map = new LinkedHashMap<>();
     map.put(1, "tom1");
     map.put(2, "tom2");
