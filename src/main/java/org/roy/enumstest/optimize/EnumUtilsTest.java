@@ -1,6 +1,8 @@
 package org.roy.enumstest.optimize;
 
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * @description: 枚举优化测试
  * @author: Ding Yawu
@@ -34,7 +36,9 @@ public class EnumUtilsTest {
     }
 
   public static void main(String[] args) {
-    System.out.println(EnumUtils.isExist(IntMsgEnum.values(), 2));
+      String string = JSON.toJSONString(null);
+      System.out.println(string);
+      System.out.println(EnumUtils.isExist(IntMsgEnum.values(), 2));
     System.out.println(EnumUtils.getMsgByCode(IntMsgEnum.values(), 2));
     System.out.println(EnumUtils.getCodeByMsg(IntMsgEnum.values(), "类型测试2"));
     System.out.println(EnumUtils.getEnumByCode(IntMsgEnum.values(), 1));
@@ -42,3 +46,4 @@ public class EnumUtilsTest {
   }
 
 }
+
