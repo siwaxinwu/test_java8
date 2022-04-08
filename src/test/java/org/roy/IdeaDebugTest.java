@@ -101,4 +101,16 @@ public class IdeaDebugTest {
     roy.setAge(20);
     System.out.println(roy);
   }
+
+  @Test
+  public void test11() {
+    NumberFormat percent = NumberFormat.getPercentInstance();
+    percent.setMaximumFractionDigits(2);
+    BigDecimal bigDecimal = BigDecimal.valueOf(0.2323);
+    System.out.println(percent.format(bigDecimal));
+  }
+
+
+
+
 }

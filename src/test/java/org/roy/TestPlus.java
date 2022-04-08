@@ -2,6 +2,7 @@ package org.roy;
 
 import org.junit.Test;
 import org.roy.entity.Employee;
+import org.roy.entity.Engineer;
 import org.roy.entity.Leader;
 
 import java.io.IOException;
@@ -217,6 +218,17 @@ public class TestPlus {
   public void test23222() throws IOException {
     BigDecimal compute = compute(26665L, 451396L);
     System.out.println(compute);
+  }
+
+  @Test
+  public void test232221() throws IOException {
+    Engineer engineer = new Engineer();
+    engineer.setAge(23);
+    engineer.setSexy("male");
+    engineer.setName("roy");
+    engineer.setSalary(0.4D);
+    System.out.println(engineer);
+
   }
 
   @Test

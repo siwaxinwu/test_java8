@@ -7,6 +7,7 @@ package org.roy;
  * @date created in 2021-08-17 19:48
  */
 public enum SingleEnum {
+
     INSTANCE;
 
     public void print(String word) {

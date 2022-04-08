@@ -13,13 +13,41 @@ import java.util.Objects;
  * date：created in 21:34 2020/9/24
  * history:
  */
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Leader {
     private String name;
     private double salary;
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public Leader() {
+
+    }
+
+    public Leader(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Leader{" +
+                "name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }

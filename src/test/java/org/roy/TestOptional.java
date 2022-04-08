@@ -5,6 +5,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 import org.roy.entity.Employee;
 import org.roy.entity.User;
+import org.roy.entity.UserPlus;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -55,7 +56,30 @@ public class TestOptional {
     System.out.println(s);
   }
 
+
+  @Test
+  public void test21() {
+    System.out.println(Calendar.getInstance());
+    UserPlus userPlus = new UserPlus();
+    String roy = Optional.ofNullable(userPlus).map(UserPlus::getUser).map(User::getName).orElse("roy");
+    System.out.println(roy);
+  }
+
+  @Test
+  public void test22221() {
+    System.out.println(test221());
+  }
+
+  public Long test221() {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(new Date());
+    calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+    return (calendar.getTime().getTime())/1000;
+  }
+
+
   public String getDefaultName() {
+
     System.out.println("execute getDefaultName............. ");
     return "default";
   }

@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GitTest {
@@ -18,6 +19,12 @@ public class GitTest {
     System.out.println("second");
     System.out.println("third");
     System.out.println("fourth");
+  }
+
+  @Test
+  public void test2() throws UnsupportedEncodingException {
+    boolean equals = Objects.equals(1, null);
+    System.out.println(equals);
   }
 
 
